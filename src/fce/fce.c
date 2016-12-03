@@ -19,17 +19,18 @@ typedef struct {
 static ines_header fce_rom_header;
 
 // FCE Lifecycle
+static int romread_off = 0;
 
 void
 romread(char *rom, void *buf, int size)
 {
-    static int off = 0;
-    memcpy(buf, rom + off, size);
-    off += size;
+    memcpy(buf, rom + romread_off, size);
+    romread_off += size;
 }
 
 int fce_load_rom(char *rom)
 {
+    romread_off = 0;
     romread(rom, &fce_rom_header, sizeof(fce_rom_header));
 
     if (memcmp(fce_rom_header.signature, "NES\x1A", 4)) {
