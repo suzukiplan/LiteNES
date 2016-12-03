@@ -3,7 +3,7 @@
 
 int fce_load_rom(char *rom);
 void fce_init();
-void fce_run();
+void fce_run_frame();
 void fce_update_screen();
 
 

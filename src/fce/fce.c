@@ -80,19 +80,13 @@ void fce_init()
     cpu_reset();
 }
 
-void wait_for_frame();
-
-void fce_run()
+void fce_run_frame()
 {
-    while(1)
+    int scanlines = 262;
+    while (scanlines-- > 0)
     {
-        wait_for_frame();
-            int scanlines = 262;
-            while (scanlines-- > 0)
-            {
-                ppu_run(1);
-                cpu_run(1364 / 12); // 1 scanline
-            }
+        ppu_run(1);
+        cpu_run(1364 / 12); // 1 scanline
     }
 }
 
